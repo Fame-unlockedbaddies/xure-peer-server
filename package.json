@@ -1,27 +1,16 @@
-const express = require('express');
-const { ExpressPeerServer } = require('peer');
-
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Xure PeerJS Server is running.');
-});
-
-const server = app.listen(process.env.PORT || 3000, () => {
-  console.log('Xure PeerJS server started on port', process.env.PORT || 3000);
-});
-
-const peerServer = ExpressPeerServer(server, {
-  path: '/',
-  allow_discovery: false,
-});
-
-app.use('/peerjs', peerServer);
-
-peerServer.on('connection', (client) => {
-  console.log('Peer connected:', client.getId());
-});
-
-peerServer.on('disconnect', (client) => {
-  console.log('Peer disconnected:', client.getId());
-});
+{
+  "name": "xure-peer-server",
+  "version": "1.0.0",
+  "description": "PeerJS signalling server for Xure",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "peer": "^0.6.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
